@@ -21,7 +21,13 @@ const part1 = async (slope = [3, 1]) => {
 }
 
 const part2 = async () => {
-  return await part1([1, 1]) * await part1([3, 1]) * await part1([5, 1]) * await part1([7, 1]) * await part1([1, 2])
+  return (await Promise.all([
+    [1, 1],
+    [3, 1],
+    [5, 1],
+    [7, 1],
+    [1, 2]
+  ].map(part1))).reduce((acc, curr) => acc * curr)
 }
 
 (async () => {
